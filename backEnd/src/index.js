@@ -30,7 +30,7 @@ app.use(indexRouter);
 
 //Database 
 mongoose.connect(
-    "mongodb+srv://sassinzz13:sassinzz13@apibooru.bbymnlo.mongodb.net/?retryWrites=true&w=majority" ,
+    "verify yourself to izumifuru for the log in" ,
 {useUnifiedTopology: true, useNewUrlParser: true}, 
 (req, res)=>{
    
