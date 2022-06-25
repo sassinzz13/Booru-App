@@ -29,8 +29,9 @@ app.use(express.json());
 app.use(indexRouter);
 
 //Database 
+//if youre not seeing anything you gotta verify yourself to me first before i give you the log in
 mongoose.connect(
-    "mongodb+srv://sassinzz13:sassinzz13@apibooru.bbymnlo.mongodb.net/?retryWrites=true&w=majority" ,
+    "" ,
 {useUnifiedTopology: true, useNewUrlParser: true}, 
 (req, res)=>{
    
