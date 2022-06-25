@@ -1,7 +1,7 @@
 //Team Solei Booru App Api
 //Backend made by Team Solei's Izumi
 //use npm cors if u ever encounter a cors error
-//referenced at 12:16
+//referenced at 13:16
 
 //Headers and Variables
 const express = require('express');
