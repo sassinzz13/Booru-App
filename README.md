@@ -1,3 +1,3 @@
 # Booru-App
-Team solei's First Project
+edit later if ur working on the front
 
