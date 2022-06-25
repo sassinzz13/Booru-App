@@ -1,0 +1,109 @@
+const express = require('express')
+const app = express()
+const path = require('path')
+
+
+//a piece of middleware
+//this looks at the body of the post request and adds super convenient properties
+//so its super easy to access the values the user submitted
+app.use(express.urlencoded({extended: false}))
+//optional app.use(koshkiiSucks) if u want it to be application wide apply this
+
+app.use(koshkiiSucks)
+app.use(express.static(path.join(__dirname, "public")))
+
+app.set("view engine", "ejs")
+app.set("views", path.join(__dirname, "views"))
+
+
+
+/*
+on our middleware function here
+we can modify req and res by adding new properties
+then when were done we call next
+so express knows this piece of middleware is done so we move on to the 
+next function for a given route
+all together if someone visits our homepage
+getWeather will run since express will call it
+express wil lsee that we called next so we can move on 
+to the next function
+
+we can also stop using next() since we want it to show 2 options
+actually on the else block we can call next() afterall
+
+we can also use this to lock out visitors on certain data's
+we dont want them to see
+ */
+function koshkiiSucks(req, res, next)
+{
+req.KoshkiiBading = false
+if (req.koshkiiBading) {
+res.send("koshkii is so gay")
+}else{
+  next()
+}
+
+}
+
+
+
+//req means request and res means response
+//each one of this are called a route
+//describing what should happen in a very specific type of request
+//if we use `` we now were free to drop down to multiple lines and start writing html
+//tho this is not ideal
+//by default the browser will try to send a get request when u submit a form
+//however the browser will take whatever value typed into the field
+//and add it to the resulting url
+//however if we use a post itll just live in the body of the request
+//as long as you dont need the resulting screen to have a sharable or recreatable url
+//post is cleaner
+
+//note that this has now been moved to home.ejs using ejs
+//we want to render a template here in which we named ours home
+app.get("/",(req, res,)=> {
+    res.render("home", {
+        isGay: req.koshkiiBading,
+        homies:
+        [{name: "koshkiii", species: "alien"}, 
+        {name: "riezii", species: "gorilla"}]
+    })
+})
+
+//instead of get were gonna use post cause were looking for a post method
+// /result cause thats where the form is 
+/*
+so a piece of middleware is really just a function that can access and modify
+the req and res objects
+
+for example at line 9 app.use whatever function that we provided on the 
+use parenthesis thats going to be used globally or we could call 
+it an application level middleware
+however we can also apply a piece of middleware into individual specific routes
+we will call that a router level middleware
+*/
+app.post("/result",(req, res)=>
+{
+   if (req.body.color.trim().toUpperCase() === "KOSHKII") {
+ res.send("congrats")
+   }else{
+res.send("Wrong")
+   }
+})
+
+app.get("/koshkii",(req,res)=>{
+    res.send("why are you here?")
+})
+
+app.get("/about", (req, res)=> {
+    res.send("koshkii bakla")
+})
+
+app.get('/api/homies', (req, res) => {
+    res.json([ 
+    {name: "koshkii", species: "alien"}, 
+    {name: "riezii", species: "gorilla"}
+])
+})
+
+app.listen(3000)
